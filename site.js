@@ -1,5 +1,14 @@
 function getTimeRemaining(endtime) {
-    var t = Date.parse(endtime) - Date.parse(new Date());
+  var date = new Date();
+    $.ajax({
+      dataType: 'json',
+      url: 'http://worldtimeapi.org/api/timezone/Europe/Stockholm',
+      success: function (result) {
+        date = new Date(result.datetime)
+      }
+  });
+
+    var t = Date.parse(endtime) - Date.parse(date);
     var seconds = Math.floor((t / 1000) % 60);
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
