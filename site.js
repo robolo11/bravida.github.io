@@ -2,7 +2,7 @@ function getTimeRemaining(endtime) {
   var date = new Date();
   $.ajax({
     dataType: 'json',
-    url: 'http://worldtimeapi.org/api/timezone/Europe/Stockholm',
+    url: 'https://worldtimeapi.org/api/timezone/Europe/Stockholm',
     success: function (result) {
       date = new Date(result.datetime)
     }
