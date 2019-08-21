@@ -1,12 +1,10 @@
 function getTimeRemaining(endtime) {
   var date = new Date();
-  $.ajax({
-    dataType: 'jsonp',
-    url: 'https://worldtimeapi.org/api/timezone/Europe/Stockholm',
-    success: function (result) {
-      date = new Date(result.datetime)
-    }
-  });
+  // $.ajax({
+  //   dataType: 'jsonp',
+  //   jsonCallback: 'mycallback',
+  //   url: 'http://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
+  // });
 
   var t = Date.parse(endtime) - Date.parse(date);
   var seconds = Math.floor((t / 1000) % 60);
@@ -21,6 +19,10 @@ function getTimeRemaining(endtime) {
     'seconds': seconds
   };
 }
+
+// function mycallback(data) {
+//   datetimeNow = new Date(data.currentDateTime);
+// }
 
 function initializeClock(id, endtime) {
   var clock = document.getElementById(id);
