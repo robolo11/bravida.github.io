@@ -6,11 +6,15 @@ function updateClock() {
   $.ajax({
     dataType: 'jsonp',
     jsonCallback: 'mycallback',
-    url: 'https://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
+    url: "https://swedishtime.azurewebsites.net/api/SwedishTime?callback=mycallback",
+    success:function(data) {
+      var time = data.datetime;
+    }
   });
 }
 
-function mycallback(data) {
+function mycallback(XMLHttpRequest, data) {
+  var headers = XMLHttpRequest.getAllResponseHeaders();
   datetimeNow = new Date(data.currentDateTime);
 
   var t = Date.parse(_endtime) - Date.parse(datetimeNow);
