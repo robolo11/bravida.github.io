@@ -1,51 +1,40 @@
-function getTimeRemaining(endtime) {
-  var date = new Date();
-  // $.ajax({
-  //   dataType: 'jsonp',
-  //   jsonCallback: 'mycallback',
-  //   url: 'http://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
-  // });
+var _timeinterval = null;
+var _endtime = null;
+var _id = null;
 
-  var t = Date.parse(endtime) - Date.parse(date);
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
+function updateClock() {
+  $.ajax({
+    dataType: 'jsonp',
+    jsonCallback: 'mycallback',
+    url: 'http://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
+  });
 }
 
-// function mycallback(data) {
-//   datetimeNow = new Date(data.currentDateTime);
-// }
+function mycallback(data) {
+  datetimeNow = new Date(data.currentDateTime);
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
+  var t = Date.parse(_endtime) - Date.parse(datetimeNow);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+
+  var clock = document.getElementById(_id);
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+  daysSpan.innerHTML = days;
+  hoursSpan.innerHTML = ('0' + hours).slice(-2);
 
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    // minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    // secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
+  if (t <= 0) {
+    clearInterval(_timeinterval);
   }
+}
+
+function initializeClock(id, endtime) {
+  _endtime = endtime;
+  _id = id;
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+  _timeinterval = setInterval(updateClock, 1000);
 }
 
 function daysBetweenDate(firstDate, secondDate) {
