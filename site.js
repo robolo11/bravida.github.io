@@ -6,7 +6,7 @@ function updateClock() {
   $.ajax({
     dataType: 'jsonp',
     jsonCallback: 'mycallback',
-    url: 'http://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
+    url: 'https://worldclockapi.com/api/jsonp/cet/now?callback=mycallback'
   });
 }
 
