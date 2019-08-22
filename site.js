@@ -34,7 +34,7 @@ function initializeClock(id, endtime) {
   _id = id;
 
   updateClock();
-  _timeinterval = setInterval(updateClock, 1000);
+  _timeinterval = setInterval(updateClock, 10 *60 * 1000); //varje 10 min
 }
 
 function daysBetweenDate(firstDate, secondDate) {
