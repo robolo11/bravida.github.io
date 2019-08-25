@@ -34,7 +34,7 @@ function mycallback(data) {
 
   if (t <= 0) {
     daysSpan.innerHTML = '0';
-    hoursSpan.innerHTML = '0';
+    hoursSpan.innerHTML = '00';
   }
   else {
     daysSpan.innerHTML = days;
