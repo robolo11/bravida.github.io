@@ -118,7 +118,8 @@
             once = false;
             var deadlineString = $(this).data('prognos');
             var deadline = new Date(deadlineString);
-            initializeClock('clockdiv', deadline);
+            deadline.setHours(0);
+            updateMainClock('clockdiv', deadline);
           }
         }
       });

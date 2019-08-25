@@ -2,6 +2,19 @@ var _timeinterval = null;
 var _endtime = null;
 var _id = null;
 
+function daysBetweenDate(firstDate, secondDate) {
+  var oneDay = 24 * 60 * 60 * 1000;
+  return Math.round((firstDate.getTime() - secondDate.getTime()) / (oneDay));
+}
+
+function updateMainClock(id, endtime) {
+  _endtime = endtime;
+  _id = id;
+
+  updateClock();
+  _timeinterval = setInterval(updateClock, 10 * 60 * 1000); //varje 10 min
+}
+
 function updateClock() {
   $.ajax({
     dataType: 'jsonp',
@@ -21,23 +34,12 @@ function mycallback(data) {
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
 
-  daysSpan.innerHTML = days;
-  hoursSpan.innerHTML = ('0' + hours).slice(-2);
-
   if (t <= 0) {
-    clearInterval(_timeinterval);
+    daysSpan.innerHTML = '0';
+    hoursSpan.innerHTML = '0';
   }
-}
-
-function initializeClock(id, endtime) {
-  _endtime = endtime;
-  _id = id;
-
-  updateClock();
-  _timeinterval = setInterval(updateClock, 10 *60 * 1000); //varje 10 min
-}
-
-function daysBetweenDate(firstDate, secondDate) {
-  var oneDay = 24 * 60 * 60 * 1000;
-  return Math.round((firstDate.getTime() - secondDate.getTime()) / (oneDay));
+  else {
+    daysSpan.innerHTML = days;
+    hoursSpan.innerHTML = ('0' + hours).slice(-2);
+  }
 }
