@@ -1,4 +1,3 @@
-var _timeinterval = null;
 var _endtime = null;
 var _id = null;
 
@@ -12,7 +11,6 @@ function updateMainClock(id, endtime) {
   _id = id;
 
   updateClock();
-  _timeinterval = setInterval(updateClock, 10 * 60 * 1000); //varje 10 min
 }
 
 function updateClock() {
