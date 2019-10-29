@@ -17,12 +17,12 @@ function updateClock() {
   $.ajax({
     dataType: 'jsonp',
     jsonCallback: 'mycallback',
-    url: "https://swedishtime.azurewebsites.net/api/SwedishTime?callback=mycallback"
+    url: "https://skinfo-api.azurewebsites.net/bravida"
   });
 }
 
 function mycallback(data) {
-  datetimeNow = new Date(data.currentDateTime);
+  datetimeNow = new Date(data);
 
   var t = Date.parse(_endtime) - Date.parse(datetimeNow);
   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
