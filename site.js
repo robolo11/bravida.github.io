@@ -17,7 +17,7 @@ function updateClock() {
   $.ajax({
     dataType: 'jsonp',
     jsonCallback: 'mycallback',
-    url: "https://skinfo-api.azurewebsites.net/bravida"
+    url: "https://clinicwiz-api.azurewebsites.net/bravida"
   });
 }
 
